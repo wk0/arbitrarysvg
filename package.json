@@ -11,13 +11,6 @@
     "prettier": "^2.7.1",
     "prettier-plugin-solidity": "^1.0.0-beta.19"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/smartcontractkit/foundry-starter-kit.git"
-  },
-  "bugs": {
-    "url": "https://github.com/smartcontractkit/foundry-starter-kit/issues"
-  },
   "scripts": {
     "setup": "make clean && make build",
     "sync": "make update",
