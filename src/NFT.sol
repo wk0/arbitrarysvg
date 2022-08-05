@@ -4,6 +4,7 @@ pragma solidity 0.8.15;
 import "solmate/tokens/ERC721.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
 import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/utils/Base64.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -48,7 +49,35 @@ contract NFT is ERC721, Ownable {
         if (ownerOf(tokenId) == address(0)) {
             revert NonExistentTokenURI();
         }
-        return tokenId.toString();
+        
+        string memory htmlStart = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title></title></head><body>';
+        string memory htmlBody = '<h1>NFT #';
+        string memory htmlBody2 = '</h1>';
+        string memory htmlEnd = '</body></html>';
+
+        string memory rawHtml = string.concat(
+          htmlStart,
+          htmlBody,
+          Strings.toString(tokenId),
+          htmlBody2,
+          htmlEnd
+        );
+
+
+        string memory json = Base64.encode(
+            bytes(
+                string.concat(
+                    '{"name": "NFT #',
+                    Strings.toString(tokenId),
+                    '", "description": "Test',
+                    '", "animation_url": "data:text/html;base64,',
+                    Base64.encode(bytes(rawHtml)),
+                    "}"
+                )
+            )
+        );
+
+        return string.concat("data:text/html;base64,", json);
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
