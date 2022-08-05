@@ -48,10 +48,7 @@ contract NFT is ERC721, Ownable {
         if (ownerOf(tokenId) == address(0)) {
             revert NonExistentTokenURI();
         }
-        return
-            bytes(baseURI).length > 0
-                ? string(abi.encodePacked(baseURI, tokenId.toString()))
-                : "";
+        return tokenId.toString();
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
