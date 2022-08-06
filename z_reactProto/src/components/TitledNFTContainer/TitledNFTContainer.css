@@ -1,0 +1,10 @@
+.nftContainer {
+    border: 1px solid black;
+    height: 20rem;
+    width: 16rem;
+}
+
+.containerTitle {
+    border-bottom: 1px solid black;
+    text-align: center;
+}

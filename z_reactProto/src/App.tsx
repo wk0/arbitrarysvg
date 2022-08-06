@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { EmbeddedNFT } from "./components"
+import { EmbeddedNFT, TitledNFTContainer } from "./components"
 
 import { useTokenURIRenderString } from "./hooks/useTokenURI"
 
@@ -30,40 +30,14 @@ function App() {
                     justifyContent: "space-around",
                 }}
             >
-                <div
-                    style={{
-                        border: "1px solid black",
-                        height: "20rem",
-                        width: "16rem",
-                    }}
-                >
-                    <div
-                        style={{
-                            borderBottom: "1px solid black",
-                            textAlign: "center",
-                        }}
-                    >
-                        <h2>HTML NFT</h2>
-                    </div>
-                    {htmlRenderString && <EmbeddedNFT src={htmlRenderString} />}
-                </div>
-                <div
-                    style={{
-                        border: "1px solid black",
-                        height: "20rem",
-                        width: "16rem",
-                    }}
-                >
-                    <div
-                        style={{
-                            borderBottom: "1px solid black",
-                            textAlign: "center",
-                        }}
-                    >
-                        <h2>SVG NFT</h2>
-                    </div>
-                    {svgRenderString && <EmbeddedNFT src={svgRenderString} />}
-                </div>
+                <TitledNFTContainer
+                    title="HTML NFT"
+                    renderString={htmlRenderString}
+                />
+                <TitledNFTContainer
+                    title="SVG NFT"
+                    renderString={svgRenderString}
+                />
             </div>
         </div>
     )

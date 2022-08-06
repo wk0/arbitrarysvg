@@ -1,0 +1,1 @@
+export { TitledNFTContainer } from './TitledNFTContainer'
