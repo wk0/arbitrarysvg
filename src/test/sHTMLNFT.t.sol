@@ -2,16 +2,16 @@
 pragma solidity ^0.8.15;
 
 import "forge-std/Test.sol";
-import "../NFT.sol";
+import "../sHTMLNFT.sol";
 
-contract NFTTest is Test {
+contract sHTMLNFTTest is Test {
     using stdStorage for StdStorage;
 
-    NFT private nft;
+    sHTMLNFT private nft;
 
     function setUp() public {
         // Deploy NFT contract
-        nft = new NFT("NFT_tutorial", "TUT", "baseUri");
+        nft = new sHTMLNFT("NFT_tutorial", "TUT", "baseUri");
     }
 
     function testFailNoMintPricePaid() public {

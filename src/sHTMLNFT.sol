@@ -11,7 +11,7 @@ error MaxSupply();
 error NonExistentTokenURI();
 error WithdrawTransfer();
 
-contract NFT is ERC721, Ownable {
+contract sHTMLNFT is ERC721, Ownable {
 
     using Strings for uint256;
     string public baseURI;
@@ -70,7 +70,7 @@ contract NFT is ERC721, Ownable {
                     '{"name": "NFT #',
                     Strings.toString(tokenId),
                     '", "description": "Test',
-                    '", "animation_url": "data:text/html;base64,',
+                    '", "image_data": "data:image/svg+xml;base64,',
                     Base64.encode(bytes(rawHtml)),
                     '"}'
                 )

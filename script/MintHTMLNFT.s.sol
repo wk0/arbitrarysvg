@@ -2,15 +2,15 @@
 pragma solidity ^0.8.15;
 
 import "forge-std/Script.sol";
-import "../src/NFT.sol";
+import "../src/HTMLNFT.sol";
 import "openzeppelin-contracts/contracts/utils/Base64.sol";
 
 
-contract MintNFT is Script {
-  NFT public nft;
+contract MintHTMLNFT is Script {
+  HTMLNFT public nft;
 
   constructor () {
-    nft = new NFT("Test", "TEST", "");
+    nft = new HTMLNFT("NFTSite", "HTML", "");
   }
 
   function run() external {
