@@ -6,7 +6,7 @@ import "../src/sHTMLNFT.sol";
 import "openzeppelin-contracts/contracts/utils/Base64.sol";
 
 
-contract MintHTMLNFT is Script {
+contract MintsHTMLNFT is Script {
   sHTMLNFT public nft;
 
   constructor () {
