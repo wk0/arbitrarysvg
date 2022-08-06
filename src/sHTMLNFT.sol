@@ -50,17 +50,20 @@ contract sHTMLNFT is ERC721, Ownable {
             revert NonExistentTokenURI();
         }
 
-        string memory htmlStart = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title></title></head><body>';
-        string memory htmlBody = '<h1>NFT #';
-        string memory htmlBody2 = '</h1>';
-        string memory htmlEnd = '</body></html>';
+        string memory svgStart = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350">';
+        string memory svgScriptStart = '<script> // <![CDATA[';
+        string memory svgScript0 = "document.querySelector('circle').addEventListener('click', (e) => { e.target.style.fill = '#113355' })";
+        string memory svgScriptEnd = '// ]]></script>';
+        string memory svgBody = '<circle cx="5" cy="5" r="4" />';
+        string memory svgEnd = "</svg>";
 
-        string memory rawHtml = string.concat(
-          htmlStart,
-          htmlBody,
-          Strings.toString(tokenId),
-          htmlBody2,
-          htmlEnd
+        string memory rawSVG = string.concat(
+          svgStart,
+          svgScriptStart,
+          svgScript0,
+          svgScriptEnd,
+          svgBody,
+          svgEnd
         );
 
 
@@ -71,7 +74,7 @@ contract sHTMLNFT is ERC721, Ownable {
                     Strings.toString(tokenId),
                     '", "description": "Test',
                     '", "image_data": "data:image/svg+xml;base64,',
-                    Base64.encode(bytes(rawHtml)),
+                    Base64.encode(bytes(rawSVG)),
                     '"}'
                 )
             )
