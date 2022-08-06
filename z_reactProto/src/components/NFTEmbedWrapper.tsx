@@ -27,7 +27,7 @@ export function NFTRender({ src }: NFTRenderProps) {
                     width="80%"
                     height="100%"
                     scrolling="no"
-                    allowTransparency={true}
+                    // allowTransparency={true}
                     allowFullScreen={true}
                     sandbox="allow-pointer-lock allow-same-origin allow-scripts allow-popups"
                 ></iframe>
