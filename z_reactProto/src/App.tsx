@@ -3,6 +3,8 @@ import { EmbeddedNFT, TitledNFTContainer } from "./components"
 
 import { useTokenURIRenderString } from "./hooks/useTokenURI"
 
+import "./App.css"
+
 const contractAddress = "0xcf7ed3acca5a467e9e704c703e8d87f634fb0fc9"
 const tokenId = "1"
 const networkID = 31337 // anvil
@@ -23,13 +25,7 @@ function App() {
     return (
         <div className="App">
             <h1>ZoraNFT Hack</h1>
-            <div
-                style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                }}
-            >
+            <div className="containerList">
                 <TitledNFTContainer
                     title="HTML NFT"
                     renderString={htmlRenderString}
