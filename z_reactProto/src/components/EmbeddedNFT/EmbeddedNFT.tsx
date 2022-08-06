@@ -1,10 +1,10 @@
-import "./NFTEmbedWrapper.css"
+import "./EmbeddedNFT.css"
 
-interface NFTRenderProps {
+interface EmbeddedNFTProps {
     src: string
 }
 
-export function NFTRender({ src }: NFTRenderProps) {
+export function EmbeddedNFT({ src }: EmbeddedNFTProps) {
     return (
         <div
             style={{
