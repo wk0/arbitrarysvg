@@ -49,7 +49,7 @@ contract NFT is ERC721, Ownable {
         if (ownerOf(tokenId) == address(0)) {
             revert NonExistentTokenURI();
         }
-        
+
         string memory htmlStart = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title></title></head><body>';
         string memory htmlBody = '<h1>NFT #';
         string memory htmlBody2 = '</h1>';
@@ -72,7 +72,7 @@ contract NFT is ERC721, Ownable {
                     '", "description": "Test',
                     '", "animation_url": "data:text/html;base64,',
                     Base64.encode(bytes(rawHtml)),
-                    "}"
+                    '"}'
                 )
             )
         );
