@@ -77,7 +77,7 @@ contract NFT is ERC721, Ownable {
             )
         );
 
-        return string.concat("data:text/html;base64,", json);
+        return string.concat("data:application/json;base64,", json);
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
