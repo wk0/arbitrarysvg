@@ -44,3 +44,9 @@
     padding: 0.25rem;
     overflow: scroll;
 }
+
+.typeSection {
+    margin: 1rem;
+    border: 1px solid black;
+    width: 80%;
+}

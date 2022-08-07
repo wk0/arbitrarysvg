@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { ConnectButton, MintButton, TitledNFTContainer } from "./components"
+import { MintScriptInput } from "./components/mintScriptInput"
+
 import { useTokenURIRenderString } from "./hooks"
 
 import { BigNumber } from "ethers"
@@ -30,6 +32,8 @@ data:application/json;base64,eyJuYW1lIjogIk5GVCAjMSIsICJkZXNjcmlwdGlvbiI6ICJUZXN
 function App() {
     const svgRenderString = useTokenURIRenderString(newRenderString)
     const [tokenId, setTokenId] = useState<BigNumber | null>(null)
+    const [scriptTokenId, setScriptTokenId] = useState<BigNumber | null>(null)
+
     const { address } = useAccount()
 
     console.log("connected address", address)
@@ -64,31 +68,63 @@ function App() {
                 )}
             </div>
             <p>click the circle</p>
-            <div className="mintSection">
-                <div className="mintContainer">
-                    <h2>Mint an ArbitrarySVG</h2>
 
-                    <div className="mintForm">
-                        <p style={{ fontWeight: "bold" }}>0.01 ether</p>
-                        {address && (
-                            <MintButton
-                                address={address}
-                                setTokenId={setTokenId}
-                            />
-                        )}
+            <div className="typeSection">
+                <div className="mintSection">
+                    <div className="mintContainer">
+                        <h2>Mint an ArbitrarySVG</h2>
+
+                        <div className="mintForm">
+                            <p style={{ fontWeight: "bold" }}>0.01 ether</p>
+                            {address && (
+                                <MintButton
+                                    address={address}
+                                    setTokenId={setTokenId}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
+                <div className="containerList">
+                    {tokenId && (
+                        <TitledNFTContainer
+                            title={`ArbitrarySVG #${tokenId}`}
+                            tokenId={tokenId}
+                            // overrideRenderString={svgRenderString}
+                        />
+                    )}
+                </div>
+                {tokenId && <p>Minted #{tokenId.toString()}</p>}
             </div>
-            <div className="containerList">
-                {tokenId && (
-                    <TitledNFTContainer
-                        title={`ArbitrarySVG #${tokenId}`}
-                        tokenId={tokenId}
-                        // overrideRenderString={svgRenderString}
-                    />
-                )}
+
+            <div className="typeSection">
+                <div className="mintSection">
+                    <div className="mintContainer">
+                        <h2>Mint an ArbitrarySVGScript</h2>
+
+                        <div className="mintForm">
+                            <p style={{ fontWeight: "bold" }}>0.05 ether</p>
+                            {address && (
+                                <MintScriptInput
+                                    address={address}
+                                    setTokenId={setTokenId}
+                                />
+                            )}
+                        </div>
+                    </div>
+                </div>
+                <div className="containerList">
+                    {scriptTokenId && (
+                        <TitledNFTContainer
+                            title={`ArbitrarySVGScript #${scriptTokenId}`}
+                            tokenId={scriptTokenId}
+                            // overrideRenderString={svgRenderString}
+                        />
+                    )}
+                </div>
+                {scriptTokenId && <p>Minted #{scriptTokenId.toString()}</p>}
             </div>
-            {tokenId && <p>Minted #{tokenId.toString()}</p>}
+
             <div className="aboutText">
                 <h2>Using on your site</h2>
                 <p>
