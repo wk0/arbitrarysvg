@@ -1,7 +1,15 @@
 import * as fs from 'fs';
 
+// TODO minify SVG with:
+// https://github.com/svg/svgo
+// svgo test.svg -o test.min.svg 
+// 
+// Minify inner SVG script with 
+// https://github.com/coderaiser/minify
+// minify script.js > script.min.js
+
 // read SVG and encode
-const buff = fs.readFileSync('./public/test.svg');
+const buff = fs.readFileSync('./public/test3.svg');
 const base64data = buff.toString('base64');
 const mime = "data:image/svg+xml;base64,";
 

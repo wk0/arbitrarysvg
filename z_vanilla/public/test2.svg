@@ -1,0 +1,28 @@
+<svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    .address { font: bold 8px sans-serif; }
+  </style>
+  <script xlink:href="https://cdn.ethers.io/lib/ethers-5.6.umd.min.js" />
+  <script>
+  // <![CDATA[
+  window.addEventListener('DOMContentLoaded', () => {
+    const wallet = ethers.Wallet.fromMnemonic(ethers.utils.entropyToMnemonic(ethers.utils.randomBytes(32)));
+    document.getElementById("address").textContent = wallet.address;
+
+    function getColor () {
+      const R = Math.round(Math.random() * 255).toString(16).padStart(2,'0')
+      const G = Math.round(Math.random() * 255).toString(16).padStart(2,'0')
+      const B = Math.round(Math.random() * 255).toString(16).padStart(2,'0')
+      return `#${R}${G}${B}`
+    }
+
+    document.querySelector('circle').addEventListener('click', (e) => {
+      e.target.style.fill = getColor()
+    })
+  })
+  // ]]>
+  </script>
+
+  <text x="20" y="20" id="address" class="address">Hello</text>
+  <circle cx="50" cy="50" r="20" />
+</svg>
