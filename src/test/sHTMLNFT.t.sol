@@ -14,12 +14,8 @@ contract sHTMLNFTTest is Test {
         nft = new sHTMLNFT("NFT_tutorial", "TUT", "baseUri");
     }
 
-    function testFailNoMintPricePaid() public {
-        nft.mintTo(address(1));
-    }
-
     function testMintPricePaid() public {
-        nft.mintTo{value: 0.08 ether}(address(1));
+        nft.mintTo(address(1));
     }
 
     function testFailMaxSupplyReached() public {
@@ -89,33 +85,6 @@ contract sHTMLNFTTest is Test {
     function testFailUnSafeContractReceiver() public {
         vm.etch(address(1), bytes("mock code"));
         nft.mintTo{value: 0.08 ether}(address(1));
-    }
-
-    function testWithdrawalWorksAsOwner() public {
-        // Mint an NFT, sending eth to the contract
-        Receiver receiver = new Receiver();
-        address payable payee = payable(address(0x1337));
-        uint256 priorPayeeBalance = payee.balance;
-        nft.mintTo{value: nft.MINT_PRICE()}(address(receiver));
-        // Check that the balance of the contract is correct
-        assertEq(address(nft).balance, nft.MINT_PRICE());
-        uint256 nftBalance = address(nft).balance;
-        // Withdraw the balance and assert it was transferred
-        nft.withdrawPayments(payee);
-        assertEq(payee.balance, priorPayeeBalance + nftBalance);
-    }
-
-    function testWithdrawalFailsAsNotOwner() public {
-        // Mint an NFT, sending eth to the contract
-        Receiver receiver = new Receiver();
-        nft.mintTo{value: nft.MINT_PRICE()}(address(receiver));
-        // Check that the balance of the contract is correct
-        assertEq(address(nft).balance, nft.MINT_PRICE());
-        // Confirm that a non-owner cannot withdraw
-        vm.expectRevert("Ownable: caller is not the owner");
-        vm.startPrank(address(0xd3ad));
-        nft.withdrawPayments(payable(address(0xd3ad)));
-        vm.stopPrank();
     }
 }
 

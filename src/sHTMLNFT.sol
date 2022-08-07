@@ -3,21 +3,17 @@ pragma solidity 0.8.15;
 
 import "solmate/tokens/ERC721.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
 import "openzeppelin-contracts/contracts/utils/Base64.sol";
 
-error MintPriceNotPaid();
 error MaxSupply();
 error NonExistentTokenURI();
 error WithdrawTransfer();
 
-contract sHTMLNFT is ERC721, Ownable {
-
+contract sHTMLNFT is ERC721 {
     using Strings for uint256;
     string public baseURI;
     uint256 public currentTokenId;
-    uint256 public constant TOTAL_SUPPLY = 10_000;
-    uint256 public constant MINT_PRICE = 0.08 ether;
+    uint256 public constant TOTAL_SUPPLY = 100;
 
     constructor(
         string memory _name,
@@ -28,9 +24,6 @@ contract sHTMLNFT is ERC721, Ownable {
     }
 
     function mintTo(address recipient) public payable returns (uint256) {
-        if (msg.value != MINT_PRICE) {
-            revert MintPriceNotPaid();
-        }
         uint256 newTokenId = ++currentTokenId;
         if (newTokenId > TOTAL_SUPPLY) {
             revert MaxSupply();
@@ -81,13 +74,5 @@ contract sHTMLNFT is ERC721, Ownable {
         );
 
         return string.concat("data:application/json;base64,", json);
-    }
-
-    function withdrawPayments(address payable payee) external onlyOwner {
-        uint256 balance = address(this).balance;
-        (bool transferTx, ) = payee.call{value: balance}("");
-        if (!transferTx) {
-            revert WithdrawTransfer();
-        }
     }
 }
