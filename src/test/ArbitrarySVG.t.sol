@@ -11,7 +11,7 @@ contract ArbitrarySVGTest is Test {
 
     function setUp() public {
         // Deploy NFT contract
-        nft = new ArbitrarySVG();
+        nft = new ArbitrarySVG("ArbitrarySVG", "ASVG", "");
     }
 
     function testMintPricePaid() public {
@@ -50,7 +50,7 @@ contract ArbitrarySVGTest is Test {
     }
 
     function testBalanceIncremented() public {
-        nft.mintTo{value: 0.08 ether}(address(1));
+        nft.mintTo(address(1));
         uint256 slotBalance = stdstore
             .target(address(nft))
             .sig(nft.balanceOf.selector)
@@ -62,7 +62,7 @@ contract ArbitrarySVGTest is Test {
         );
         assertEq(balanceFirstMint, 1);
 
-        nft.mintTo{value: 0.08 ether}(address(1));
+        nft.mintTo(address(1));
         uint256 balanceSecondMint = uint256(
             vm.load(address(nft), bytes32(slotBalance))
         );
@@ -71,7 +71,7 @@ contract ArbitrarySVGTest is Test {
 
     function testSafeContractReceiver() public {
         Receiver receiver = new Receiver();
-        nft.mintTo{value: 0.08 ether}(address(receiver));
+        nft.mintTo(address(receiver));
         uint256 slotBalance = stdstore
             .target(address(nft))
             .sig(nft.balanceOf.selector)
@@ -84,7 +84,7 @@ contract ArbitrarySVGTest is Test {
 
     function testFailUnSafeContractReceiver() public {
         vm.etch(address(1), bytes("mock code"));
-        nft.mintTo{value: 0.08 ether}(address(1));
+        nft.mintTo(address(1));
     }
 }
 

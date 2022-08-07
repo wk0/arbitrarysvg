@@ -12,13 +12,23 @@ error WithdrawTransfer();
 contract ArbitrarySVG is ERC721 {
     using Strings for uint256;
 
+    string public baseURI;
     uint256 public currentTokenId;
+    uint256 public constant TOTAL_SUPPLY = 100;
 
-    constructor() ERC721("ArbitrarySVG", "ASVG") {}
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        string memory _baseURI
+    ) ERC721(_name, _symbol) {
+        baseURI = _baseURI;
+    }
 
     function mintTo(address recipient) public payable returns (uint256) {
         uint256 newTokenId = ++currentTokenId;
-        
+        if (newTokenId > TOTAL_SUPPLY) {
+            revert MaxSupply();
+        }
         _safeMint(recipient, newTokenId);
         return newTokenId;
     }
