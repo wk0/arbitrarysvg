@@ -11,9 +11,20 @@ export const MintScriptInput = ({ address, setTokenId }: MintScriptButton) => {
     const [script, setScript] = useState<string>("")
 
     return (
-        <div>
-            <label>place javascript here in single quotes</label>
-            <textarea onChange={(e) => setScript(e.target.value)}></textarea>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+            }}
+        >
+            <label>place javascript here:</label>
+            <textarea
+                rows={20}
+                cols={60}
+                onChange={(e) => setScript(e.target.value)}
+            ></textarea>
             <MintScriptButton
                 address={address}
                 setTokenId={setTokenId}

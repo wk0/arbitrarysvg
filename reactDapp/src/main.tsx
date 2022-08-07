@@ -13,10 +13,7 @@ const { chains, provider } = configureChains(
     [
         // chain.mainnet,
         chain.rinkeby,
-        // chain.polygon,
-        // chain.polygonMumbai,
-        // chain.localhost,
-        // chain.foundry,
+        // chain.polygon
     ],
     [publicProvider()]
 )
