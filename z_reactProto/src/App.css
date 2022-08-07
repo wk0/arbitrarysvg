@@ -12,3 +12,35 @@
     margin-top: 2rem;
     width: 80%;
 }
+
+.mintContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mintSection {
+    margin-top: 2rem;
+    width: 80%;
+}
+
+.mintForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.aboutText {
+    width: 80%;
+}
+
+.preCode {
+    color: white;
+    background-color: black;
+    padding: 0.25rem;
+    overflow: scroll;
+}
