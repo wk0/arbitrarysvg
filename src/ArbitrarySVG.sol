@@ -4,17 +4,20 @@ pragma solidity 0.8.15;
 import "solmate/tokens/ERC721.sol";
 import "openzeppelin-contracts/contracts/utils/Strings.sol";
 import "openzeppelin-contracts/contracts/utils/Base64.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
+error MintPriceNotPaid();
 error MaxSupply();
 error NonExistentTokenURI();
 error WithdrawTransfer();
 
-contract ArbitrarySVG is ERC721 {
+contract ArbitrarySVG is ERC721, Ownable {
     using Strings for uint256;
 
     string public baseURI;
     uint256 public currentTokenId;
-    uint256 public constant TOTAL_SUPPLY = 100;
+    uint256 public constant TOTAL_SUPPLY = 1000;
+    uint256 public constant MINT_PRICE = 0.01 ether;
 
     constructor(
         string memory _name,
@@ -25,6 +28,9 @@ contract ArbitrarySVG is ERC721 {
     }
 
     function mintTo(address recipient) public payable returns (uint256) {
+        if (msg.value != MINT_PRICE) {
+            revert MintPriceNotPaid();
+        }
         uint256 newTokenId = ++currentTokenId;
         if (newTokenId > TOTAL_SUPPLY) {
             revert MaxSupply();
@@ -57,9 +63,9 @@ contract ArbitrarySVG is ERC721 {
         string memory json = Base64.encode(
             bytes(
                 string.concat(
-                    '{"name": "NFT #',
+                    '{"name": "ArbitrarySVG #',
                     Strings.toString(tokenId),
-                    '", "description": "Test',
+                    '", "description": "A completely on-chain interactive NFT',
                     '", "image_data": "data:image/svg+xml;base64,',
                     Base64.encode(bytes(rawSVG)),
                     '"}'
@@ -67,5 +73,13 @@ contract ArbitrarySVG is ERC721 {
             )
         );
         return string.concat("data:application/json;base64,", json);
+    }
+
+    function withdrawPayments(address payable payee) external onlyOwner {
+        uint256 balance = address(this).balance;
+        (bool transferTx, ) = payee.call{value: balance}("");
+        if (!transferTx) {
+            revert WithdrawTransfer();
+        }
     }
 }

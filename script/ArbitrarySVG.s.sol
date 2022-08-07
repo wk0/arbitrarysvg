@@ -8,7 +8,7 @@ contract DeployArbitrarySVG is Script {
   function run() external {
 
     vm.startBroadcast();
-    new ArbitrarySVG();
+    new ArbitrarySVG("ArbitrarySVG", "ASVG", "");
     vm.stopBroadcast();
   }
 }

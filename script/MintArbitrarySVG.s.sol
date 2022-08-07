@@ -10,11 +10,11 @@ contract MintArbitrarySVG is Script {
   ArbitrarySVG public nft;
 
   constructor () {
-    nft = new ArbitrarySVG();
+    nft = new ArbitrarySVG("ArbitrarySVG", "ASVG", "");
   }
 
   function run() external {
-    uint256 tokenId = nft.mintTo(address(1));
+    uint256 tokenId = nft.mintTo{value: 0.01 ether}(address(1));
     string memory tokenURI = nft.tokenURI(tokenId);
     console.log(tokenURI);
   }
