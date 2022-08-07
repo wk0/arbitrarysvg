@@ -1,15 +1,22 @@
 import { EmbeddedNFT } from ".."
 import "./TitledNFTContainer.css"
 
+import { useTokenURI, useTokenIdRenderString } from "../../hooks/useContract"
+import { BigNumber } from "ethers"
+
 interface TitledNFTContainerProps {
     title: string
-    renderString: string | null
+    tokenId: BigNumber
+    //renderString: string | null
 }
 
 export const TitledNFTContainer = ({
     title,
-    renderString,
-}: TitledNFTContainerProps) => {
+    tokenId,
+}: //renderString,
+TitledNFTContainerProps) => {
+    const renderString = useTokenIdRenderString(tokenId)
+
     return (
         <div className="nftContainer">
             <div className="containerTitle">

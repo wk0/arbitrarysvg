@@ -9,6 +9,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 4rem;
+    margin-top: 2rem;
     width: 80%;
 }

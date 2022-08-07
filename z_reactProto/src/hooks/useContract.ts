@@ -7,32 +7,51 @@ import Contract from "./sHTMLNFT.json"
 const contractAddress = "0x0165878a594ca255338adfa4d48449f69242eb8f"
 
 
-interface UseTokenURIProps {
-  address: string
-  tokenId: BigNumber
-}
 
-export const useTokenURI = ({ tokenId }: UseTokenURIProps) => {
+export const useTokenURI = (tokenId: BigNumber) => {
   const [tokenURI, setTokenURI] = useState<string | null>(null)
 
-  const { data, isError, isLoading } = useContractRead({ 
+  useContractRead({ 
     addressOrName: contractAddress,
     contractInterface: Contract.abi,
     functionName: 'tokenURI',
     args: tokenId,
     onSuccess(data) {
-        console.log(data)
         setTokenURI(data.toString());
     },
   })
   return tokenURI;
-
 }
 
 
 // https://developer.mozilla.org/en-US/docs/Glossary/Base64
 function UnicodeDecodeB64(str: string) {
   return decodeURIComponent(window.atob(str))
+}
+
+export const useTokenIdRenderString = (tokenId: BigNumber) => {
+  const [renderString, setRenderString] = useState<string | null>("")
+  const tokenURI = useTokenURI(tokenId)
+
+  useEffect(() => {
+    if (tokenURI) {
+      const [encoding, data] = tokenURI.split(",")
+      const tokenJSONString = UnicodeDecodeB64(data)
+      const tokenJSON = JSON.parse(tokenJSONString)
+      
+
+      if ("animation_url" in tokenJSON) {
+        const animationUrl = tokenJSON["animation_url"]
+        setRenderString(animationUrl)
+      }
+      if ("image_data" in tokenJSON) {
+        const imageData = tokenJSON["image_data"]
+        setRenderString(imageData)
+      }
+    }
+  }, [tokenURI])
+  
+  return renderString;
 }
 
 export const useTokenURIRenderString = (tokenURI: string) => {
