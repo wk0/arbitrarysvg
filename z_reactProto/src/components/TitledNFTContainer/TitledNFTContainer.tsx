@@ -7,22 +7,50 @@ import { BigNumber } from "ethers"
 interface TitledNFTContainerProps {
     title: string
     tokenId: BigNumber
-    //renderString: string | null
+    overrideRenderString?: string
 }
 
 export const TitledNFTContainer = ({
     title,
     tokenId,
+    overrideRenderString,
 }: //renderString,
 TitledNFTContainerProps) => {
     const renderString = useTokenIdRenderString(tokenId)
-
     return (
-        <div className="nftContainer">
-            <div className="containerTitle">
-                <h2>{title}</h2>
+        <div>
+            <div className="nftContainer">
+                <div className="containerTitle">
+                    <h2>{title}</h2>
+                </div>
+                {overrideRenderString ? (
+                    <>
+                        <EmbeddedNFT src={overrideRenderString} />
+                        <div
+                            style={{
+                                width: "80%",
+                                overflowWrap: "break-word",
+                            }}
+                        >
+                            {overrideRenderString}
+                        </div>
+                    </>
+                ) : (
+                    renderString && (
+                        <>
+                            <EmbeddedNFT src={renderString} />
+                            <div
+                                style={{
+                                    width: "80%",
+                                    overflowWrap: "break-word",
+                                }}
+                            >
+                                {renderString}
+                            </div>
+                        </>
+                    )
+                )}
             </div>
-            {renderString && <EmbeddedNFT src={renderString} />}
         </div>
     )
 }

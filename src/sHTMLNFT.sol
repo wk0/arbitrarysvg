@@ -43,22 +43,15 @@ contract sHTMLNFT is ERC721 {
             revert NonExistentTokenURI();
         }
 
-        string memory svgStart = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 350">';
-        string memory svgScriptStart = '<script> // <![CDATA[';
-        string memory svgScript0 = "document.querySelector('circle').addEventListener('click', (e) => { e.target.style.fill = '#113355' })";
-        string memory svgScriptEnd = '// ]]></script>';
-        string memory svgBody = '<circle cx="5" cy="5" r="4" />';
-        string memory svgEnd = "</svg>";
+        string memory svgStart = '<svg viewBox="0 0 350 350" xmlns="http://www.w3.org/2000/svg"><script>//<![CDATA[\n';
+        string memory script = 'window.addEventListener("DOMContentLoaded",(()=>{document.querySelector("circle").addEventListener("click",(t=>{t.target.style.fill=function(){const t=Math.round(255*Math.random()).toString(16).padStart(2,"0"),n=Math.round(255*Math.random()).toString(16).padStart(2,"0"),r=Math.round(255*Math.random()).toString(16).padStart(2,"0");return"#".concat(t.toString(),n.toString(),r.toString())}()}))}));';
+        string memory svgEnd = '\n// ]]></script><circle cx="175" cy="175" r="100"/></svg>';
 
         string memory rawSVG = string.concat(
           svgStart,
-          svgScriptStart,
-          svgScript0,
-          svgScriptEnd,
-          svgBody,
+          script,
           svgEnd
         );
-
 
         string memory json = Base64.encode(
             bytes(
