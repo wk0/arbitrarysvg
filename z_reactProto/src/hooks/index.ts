@@ -1,1 +1,1 @@
-export { useTokenURI } from './useTokenURI';
+export { useTokenURI, useTokenURIRenderString } from './useContract';
