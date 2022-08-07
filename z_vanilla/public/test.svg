@@ -2,6 +2,8 @@
   <script>
   // <![CDATA[
   window.addEventListener('DOMContentLoaded', () => {
+    alert('test');
+
     function getColor () {
       const R = Math.round(Math.random() * 255).toString(16).padStart(2,'0')
       const G = Math.round(Math.random() * 255).toString(16).padStart(2,'0')
