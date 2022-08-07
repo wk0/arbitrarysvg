@@ -9,25 +9,16 @@ error MaxSupply();
 error NonExistentTokenURI();
 error WithdrawTransfer();
 
-contract sHTMLNFT is ERC721 {
+contract ArbitrarySVG is ERC721 {
     using Strings for uint256;
-    string public baseURI;
-    uint256 public currentTokenId;
-    uint256 public constant TOTAL_SUPPLY = 100;
 
-    constructor(
-        string memory _name,
-        string memory _symbol,
-        string memory _baseURI
-    ) ERC721(_name, _symbol) {
-        baseURI = _baseURI;
-    }
+    uint256 public currentTokenId;
+
+    constructor() ERC721("ArbitrarySVG", "ASVG") {}
 
     function mintTo(address recipient) public payable returns (uint256) {
         uint256 newTokenId = ++currentTokenId;
-        if (newTokenId > TOTAL_SUPPLY) {
-            revert MaxSupply();
-        }
+        
         _safeMint(recipient, newTokenId);
         return newTokenId;
     }
@@ -65,7 +56,6 @@ contract sHTMLNFT is ERC721 {
                 )
             )
         );
-
         return string.concat("data:application/json;base64,", json);
     }
 }

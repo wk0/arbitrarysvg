@@ -1,0 +1,13 @@
+Local Dev 
+
+run local network:
+  Term1: make anvil 
+  Term2: make anvil-deploy contract="NFT"
+
+  cast call [addr] "mintTo(address)(uint256)" --rpc-url="localhost:8545" 
+
+Mint NFT: 
+  cast send [contractAddr] "mintTo(address)(uint256)" 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266 --value 0.08ether --from 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+
+
+Update z_spa-proto with contractAddress
