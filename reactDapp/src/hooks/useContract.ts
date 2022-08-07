@@ -4,7 +4,7 @@ import { BigNumber} from 'ethers'
 import { ethers } from 'ethers';
 
 import Contract from "./ArbitrarySVG.json"
-const contractAddress = "0x9fe46736679d2d9a65f0992f2272de9f3c7fa6e0"
+const contractAddress = "0x82d6f77aB59E1B28a01728AFba5f227bDFe41652"
 
 export const useTokenURI = (tokenId: BigNumber) => {
   const [tokenURI, setTokenURI] = useState<string | null>(null)

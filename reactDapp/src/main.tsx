@@ -11,12 +11,12 @@ import { publicProvider } from "wagmi/providers/public"
 
 const { chains, provider } = configureChains(
     [
-        chain.mainnet,
+        // chain.mainnet,
         chain.rinkeby,
-        chain.polygon,
-        chain.polygonMumbai,
-        chain.localhost,
-        chain.foundry,
+        // chain.polygon,
+        // chain.polygonMumbai,
+        // chain.localhost,
+        // chain.foundry,
     ],
     [publicProvider()]
 )
