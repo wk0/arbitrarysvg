@@ -5,7 +5,7 @@ import {
     TitledNFTContainer,
     TitledScriptNFTContainer,
 } from "./components"
-import { MintScriptInput } from "./components/mintScriptInput"
+import { MintScriptInput } from "./components/MintScriptInput"
 
 import { useTokenURIRenderString } from "./hooks"
 
