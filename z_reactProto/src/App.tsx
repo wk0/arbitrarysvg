@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react"
-import { ConnectButton, MintButton, TitledNFTContainer } from "./components"
+import {
+    ConnectButton,
+    MintButton,
+    TitledNFTContainer,
+    TitledScriptNFTContainer,
+} from "./components"
 import { MintScriptInput } from "./components/mintScriptInput"
 
 import { useTokenURIRenderString } from "./hooks"
@@ -107,7 +112,7 @@ function App() {
                             {address && (
                                 <MintScriptInput
                                     address={address}
-                                    setTokenId={setTokenId}
+                                    setTokenId={setScriptTokenId}
                                 />
                             )}
                         </div>
@@ -115,7 +120,7 @@ function App() {
                 </div>
                 <div className="containerList">
                     {scriptTokenId && (
-                        <TitledNFTContainer
+                        <TitledScriptNFTContainer
                             title={`ArbitrarySVGScript #${scriptTokenId}`}
                             tokenId={scriptTokenId}
                             // overrideRenderString={svgRenderString}
