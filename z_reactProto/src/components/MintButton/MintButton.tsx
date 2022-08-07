@@ -27,9 +27,7 @@ export const MintButton = ({ address, setTokenId }: MintButton) => {
                 </div>
             )}
             {mintError && (
-                <div>
-                    An error occurred preparing the transaction: {mintError}
-                </div>
+                <div>An error occurred in the transaction: {mintError}</div>
             )}
         </div>
     )

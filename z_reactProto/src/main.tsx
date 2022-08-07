@@ -7,6 +7,7 @@ import { WagmiConfig, createClient, chain, configureChains } from "wagmi"
 
 import { InjectedConnector } from "wagmi/connectors/injected"
 import { publicProvider } from "wagmi/providers/public"
+// import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 
 const { chains, provider } = configureChains(
     [

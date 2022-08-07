@@ -14,6 +14,7 @@ function App() {
     const [tokenId, setTokenId] = useState<BigNumber | null>(null)
     const { address } = useAccount()
 
+    console.log("connected address", address)
     return (
         <div className="app">
             <h1>ZoraNFT Hack</h1>

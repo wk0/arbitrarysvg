@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite } from 'wagmi'
+import {  useContractRead, useContractWrite, usePrepareContractWrite } from 'wagmi'
 import { BigNumber} from 'ethers'
 import { ethers } from 'ethers';
-import Contract from "./sHTMLNFT.json"
 
-const contractAddress = "0x0dcd1bf9a1b36ce34237eeafef220932846bcd82"
-
-
+import Contract from "./ArbitrarySVG.json"
+const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3"
 
 export const useTokenURI = (tokenId: BigNumber) => {
   const [tokenURI, setTokenURI] = useState<string | null>(null)
